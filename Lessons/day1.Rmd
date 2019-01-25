@@ -1,0 +1,340 @@
+---
+title: "Day One"
+author: "Brian Bell"
+date: "January 9, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##History and Introduction to R
+
+##The Native R Environment
+You can use R directly through its native interface. Later, we will explore RStudio.  When you click on R, it will open the native graphical user interface [GUI]. You should see something like this screen. The R native GUI is a very good basic interface to work with R. The principle drawback for many users is that this interface requires that a user be familiar with R commands and the directory file structure of their computer. Most users will appreciate the additional features found in an integrated development environment [IDE] like RStudio. Most of the contents on this webpage will focus on RStudio for this reason. All R commands and functionality discussed can be accomplished in the native R GUI also.
+
+![Screenshot of the R Console](C:\\Users\\1045375001CIV\\Desktop\\Data Science\\justR.jpg){ width=50% }
+Lets go ahead and hit some buttons.
+
+```{r,out.width = '40%'}
+6+6
+x=5
+x
+x+5
+plot(mtcars)
+```
+
+##R Studio
+OK, now go ahead close this version of R.  We will work in R Studio for the rest of this course.
+When you open R Studio you will see something like this.
+
+![Screenshot of the R Studio Console](C:\\Users\\1045375001CIV\\Desktop\\Data Science\\RStudio.jpg){ width=50% }
+
+*  The R studio IDE is very similar to what you saw in Excel's VBE. You have basically the same windows, but they look a little different.
+*  Top Left:(File New Script) Source Window, similar to VBA's Editor/Code window - where you write and run code.Your new script has a tab with the name Untitled1. Once you save the script, the tab will show the script name. Normally, an R script will have an **{.R} extension, like MyScript.R. You will usually save your R scripts in your default folder (called your working directory). Another topic in this learning infrastructure will guide you through the steps of setting your default folder in RStudio. 
+*  Bottom Left: Console, for immediate results - What's the equivalent in Excel? (Immediate Window) you can also type code in here, but it won't be saved.
+*  Top Right: Environment, List of your objects (df, variables, lists, functions) - In Excel Locals
+*  Bottom Right: Basically a Project Window, in the bottom right section you can see a whole lot other information, like files, the plots (diagrams) you have made from data, R packages, help information etc. In this class you will often be looking at plots of the data you are working on.
+*  Make yours look like mine:View $\xrightarrow{}$ Panes$\xrightarrow{}$ Pane Layout
+
+Lets write some code.  
+In the console window, type:
+```{r}
+5+5
+round(pi,4)
+x="hello world"
+x
+#now push the cursor up arrow.
+
+```
+That's cool and fun, however I would recommend we do our real coding in the the top left source window, and just do the testing in the command window.
+So in the source window write:
+```{r,eval=FALSE}
+5+5
+round(pi,4)
+x="hello world"
+x
+```
+
+* Now put your cursor at each line and hit the "run" button on the above ribbon or use the quick key "Ctrl Enter".
+
+* Now highlight all the code and hit run.
+
+##Simple Objects
+
+The = and <- operators assign a numeric value to an object.  The latter, which looks like a left arrow is what we should use to assign an object a value.
+```{r}
+x<-4
+y<-5
+x+y
+```
+
+The command **rm** will clear an object.
+
+Now look in the environment window
+```{r,eval=FALSE}
+rm(x)
+x
+```
+Now look in the environment window.
+
+###Exercise 1.
+Your Turn: $P(X\leq x)=1-e^{-\lambda x}$ Where the mean rate is 3 arrivals per hour.  What is the probability the next arrival occurs within 20 minutes.
+
+```{r, echo=FALSE}
+x<-20/60
+lambda<-3
+1-exp(-1*lambda*x)
+```
+
+
+### Vectors
+The Vector is the primary data structure in R. All elements in a vector must be the same type. We can create vectors using
+
+*  the : operator
+*  the *c* function ---combine
+*  the *seq* function --- sequence
+*  the *rep* function ---repeat
+
+Let's try this. In the command window:
+```{r}
+1:10
+5:-3
+c(1,2,3)
+x<-c(1,2,3)
+x
+x<-seq(2,20,by=2) #how did I know to use "by"
+x
+rep(5,4)
+rep(1:3,2)
+#Now what will this do?
+rep(seq(1,5,by=2),2)
+a<-c(1,2,3,4,"dog")   #coercion
+```
+
+To extract elements of a vector, we use brackets and the corresponding subscript.
+```{r}
+x<-seq(1,20,by=2)
+y<-x[4]
+y<-x[4:7]
+y<-x[c(1,3,5,8)]
+y<-x[-4]
+```
+
+Vector Arithmetic
+Arithmetic can be conducted with and between vectors.
+```{r}
+
+(1:10)+3
+x<-(1:10)^2
+y<-2^(1:10)
+```
+
+##Projects
+ Set up a project
+ You have some code here in your source window. You probably want to save that. You could hit save at the top, but I want to encourage you to keep all of your files in one place and in a standard format so that they are easy for you to retrieve and review. There is a file in your working directory called "script\_template". Open it.
+   Click on the open folder at the top. Choose the "script\_template.r" file.
+
+ At the top of the script you see some administrative information. Put your name as Student,  change the date and give your script a title.
+ Whenever you start a new script, open this template and change the administrative information to what you need. This keeps everything in a standard format, but it also has a lot of functions that you use at the start of a new  script so you don't have to remember how to format all of them.
+ You'll see getwd() and setwd() in the list. Also rm(). We will talk about all of the other stuff as well.
+
+ Copy all of your code to this new script and use save as and name the file day1R. Notice that unsaved scripts are red. Once you  save they turn black. As we proceed through the course, keep everything organized in this file.
+ You will need to refer to it later as you code.
+
+ Close the old script. You don't need to save it.
+
+ At the top right is a little R icon inside a three-dimensional box. Click on it.
+ The first  selection is New Project. Click on that. Choose existing directory. Now browse to the folder with the scripts that serves as your working directory on your desktop. Click create project.
+
+ Give the project a name. Now you have a project open with your script. Anytime you want to add to the introduction course, you can go to the top right, click on the R three-dimensional icon  and select your project and R will bring up your project source (scripts) and  set the working directory to the one with the project file in it. Its pretty handy.
+
+ Lets try it out, but first open data so we can have an object in our environment. You should have the command to do that.
+ Refer to what we have typed so far. What command do you use?
+ There are two options. Choose:
+ 
+mydata <- mtcars
+session$->$setwd to Project Directory
+
+ Hit save.
+ Close R. Don't save the workspace if prompted. Open R  Select your project from the top right. You should have everything back, but your data is missing.
+ Run the code from your script to call mtcars again and call it "mydata".
+
+##Types of Data
+Data Types and Classes
+Open some test data
+```{r}
+testdata <- read.csv("testdata.csv")
+```
+Click on the blue arrow next to the new data at the top right
+You see information about the variables included with this dataframe. Next to the name is the data type. There are a lot of types and its important to know what kind you are working with  just like in excel.
+* numeric = numbers, floats, double, can have decimals
+integer = whole numbers, in atomic (one mode of data) will have an "L" after the number
+* factor = categories
+* character = string, often its helpful to convert variables to strings before changing
+* logical = True/False, boolean
+* date = date---We will discuss these later.
+
+##objects in R  
+A vector is a sequence of data elements of the same basic type.
+```{r}
+x<-c(1:10)
+```
+A matrix is a collection of data elements arranged in a two-dimensional rectangular layout. Same as vector, the components in a matrix must be of the same basic type. The following is an example of a matrix with 4 rows and 3 columns.
+
+```{r}
+t <- matrix( #write this in one line.  I broke it up to explain characteristics.
+     1:12,                 # the data components (Don't type ""!)
+     nrow=4,               # number of rows
+     ncol=3,               # number of columns
+     byrow = FALSE)        # fill matrix by columns
+t                          # print the matrix
+t[1,2]                    # returns the value at Row1, Col2
+
+t[1,]                     # returns row 1
+
+t[,1]                     # returns col 1
+```
+
+A data frame is more general than a matrix, in that different columns can have different basic data types. Data frame is the most common data type we are going to use in this class.Extracting components from data frames is somehow similar to what we did for matrices, but after assigning names to each column (variable), it becomes more flexible.
+
+```{r}
+ d <- c(1,2,3,4)
+ e <- c("red", "white", "red", NA)
+ f <- c(TRUE,TRUE,TRUE,FALSE)
+ mydata <- data.frame(d,e,f)
+ names(mydata) <- c("ID","Color","Passed")      # variable names
+
+ mydata$ID                       # try mydata["ID"] or mydata[1]
+
+ mydata$ID[3]                    # try mydata[3,"ID"] or mydata[3,1]
+
+ mydata[1:2,]                    # first two records
+ 
+ mydata[2,3]
+ 
+ mydata[3,2]
+
+```
+
+A list is a generic vector containing other objects. There is no restriction on data types or length of the components. Usually, we work with lists that have named components. Lists can be accessed in similar fashion to vectors. The secret to lists is the double bracket [[]]. Integer, logical or character vectors can be used for indexing.
+
+```{r}
+myList <- list("a" = c("bob","kelly","scotty"), "b" = mydata, "c" = 1:3)
+ myList[c(1:2)]
+ myList[[1]]
+ myList[[1]][[2]]
+```
+
+##Working with Data
+Open some test data
+```{r}
+testdata <- read.csv("testdata.csv")
+head(testdata)
+#use the dollar sign to define vectors
+head(testdata$salary)
+mean(testdata$salary)
+mean(testdata$cars) #what is this error?
+mean(testdata$cars, na.rm = TRUE)
+median(testdata$education)
+```
+
+###Checking and Changing data types
+```{r}
+is.numeric(testdata$salary) # notice the use of the $ to call a specific vector
+is.character(testdata$education)
+is.logical(testdata$married) #it should be, lets change it
+as.logical(testdata$married)  #this gave us the result we wanted, but just displayed it. We want to change it. Lets define it as a vector in our dataframe.
+testdata$marriedlogical <- as.logical(testdata$married)
+#birthdate is a factor (or categorical variable), we want it to be a date
+testdata$birthdate <- as.Date(testdata$birthdate, format = "%d-%b-%y")#  describe the argument
+Sys.Date() # return's today's date
+date() #returns the current date and time
+today <- Sys.Date()
+today
+format(today, format = "%B %d %Y") 
+age <- (today-testdata$birthdate)/365.25
+```
+
+###Exercise 1
+
+For an initial principal amount $P$ and a nominal annual interest rate $r$ that is compounded $n$ times per year over a span of $t$ years, the final value is a certificate of deposit is:
+
+$$F=P(1+\frac{r}{n})^{nt}$$
+Write **{R} Commands that set the objects **P**,**R**,**n**, and **t** to
+$P=100,r=.08,n=12,t=3,4,5,6,7,8$
+and compute the associated value of F.
+
+```{r}
+p<-100
+r<-.08
+n<-12
+t<-3:8
+F<-p*(1+r/n)^(n*t)
+```
+
+### Exercise 2. 
+* Use the rep function to create a vector that has the following elements (hint use a nested combine):
+2.7, 8.0,3.0,2.7,8.0,3.0
+* Use the seq function with the by argument to create a vector that has the following elements.
+0.0, 0.6, 1.2, 1.8, 2.4
+```{r}
+x<-rep(c(2.7,8,2),times=2)
+x
+x<-seq(0 , 2.4, by=.6)
+x
+```
+### Exercise 3.
+Write an R command that calculates the sum of $n^n$ for $n=1,2,...,10$.
+```{r}
+x<-(1:10)^(1:10)
+x
+```
+###Exercise 4.
+item Do research on the mathematical operator "modulo" in R. What will the following R commands return:
+
+> x<-1:12
+> x%%2
+> x%%3
+
+###Exercise 5.
+Create the following Matrices and execute the operations
+* $2\times x$
+* $2\times y$
+* $x\times y$
+* Extract the first column of matrix x
+* Extract the first row om matrix y
+```{r,echo=FALSE}
+x<-matrix(1:6,ncol=3,byrow = FALSE)
+x
+y<-matrix(1:6,ncol=2,byrow = FALSE)
+2*x
+2*y
+#x*y
+x[,1]
+y[1,]
+```
+
+###Exercise 6.
+Create the following data frame.
+```{r}
+hero<-c("spider-man","captain america","wolverine","rogue",
+"timothy dugan") 
+deceased<-c(FALSE,FALSE,FALSE,FALSE,TRUE)
+gender<-c("Male","Male","Male","Female","Male")
+appearances<-c(4043,3360,3061,850,517)
+marvelDF<-data.frame(hero,deceased,gender,appearances)
+```
+
+What will the following two lines of code do? Test them out individually.
+
+```{r,eval=FALSE}
+marvelDF[marvelDF$gender=="Male"&marvelDF$appearances>1000,]
+subset(marvelDF,gender=="Male"&appearances>1000)
+```
+
+###Excercise 7.
+Read in the marvel.csv file and assign it as a data frame to the object marvelDF.
+Create a new data frame called marvelSubDf that consists of all the female characters who have more than 100 appearances.
+
